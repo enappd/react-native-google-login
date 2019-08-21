@@ -30,9 +30,10 @@ target 'RNGoogleLogin' do
   pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
 
-  pod 'RNGoogleSignin', :path => '../node_modules/react-native-google-signin'
 
   pod 'RNFirebase', :path => '../node_modules/react-native-firebase'
+
+  pod 'RNGoogleSignin', :path => '../node_modules/react-native-google-signin'
 
   target 'RNGoogleLoginTests' do
     inherit! :search_paths

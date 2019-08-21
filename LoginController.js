@@ -18,7 +18,6 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 import { GoogleSignin, GoogleSigninButton, statusCodes } from 'react-native-google-signin';
-import firebase from 'react-native-firebase'
 
 export default class LoginController extends Component {
   constructor(props) {
@@ -41,36 +40,36 @@ export default class LoginController extends Component {
     });
   }
 
-  firebaseGoogleLogin = async () => {
-    try {
-      // add any configuration settings here:
-      await GoogleSignin.hasPlayServices();
-      const userInfo = await GoogleSignin.signIn();
-      this.setState({ userInfo: userInfo, loggedIn: true });
-      console.log(userInfo);
-      // create a new firebase credential with the token
-      const credential = firebase.auth.GoogleAuthProvider.credential(userInfo.idToken, userInfo.accessToken)
-      // login with credential
-      const firebaseUserCredential = await firebase.auth().signInWithCredential(credential);
+  // firebaseGoogleLogin = async () => {
+  //   try {
+  //     // add any configuration settings here:
+  //     await GoogleSignin.hasPlayServices();
+  //     const userInfo = await GoogleSignin.signIn();
+  //     this.setState({ userInfo: userInfo, loggedIn: true });
+  //     console.log(userInfo);
+  //     // create a new firebase credential with the token
+  //     const credential = firebase.auth.GoogleAuthProvider.credential(userInfo.idToken, userInfo.accessToken)
+  //     // login with credential
+  //     const firebaseUserCredential = await firebase.auth().signInWithCredential(credential);
 
-      console.warn(JSON.stringify(firebaseUserCredential.user.toJSON()));
-    } catch (error) {
-      console.log(error)
-      if (error.code === statusCodes.SIGN_IN_CANCELLED) {
-        // user cancelled the login flow
-        console.log("user cancelled the login flow");
-      } else if (error.code === statusCodes.IN_PROGRESS) {
-        // operation (f.e. sign in) is in progress already
-        console.log("operation (f.e. sign in) is in progress already");
-      } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
-        // play services not available or outdated
-        console.log("play services not available or outdated");
-      } else {
-        // some other error happened
-        console.log("some other error happened");
-      }
-    }
-  }
+  //     console.warn(JSON.stringify(firebaseUserCredential.user.toJSON()));
+  //   } catch (error) {
+  //     console.log(error)
+  //     if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+  //       // user cancelled the login flow
+  //       console.log("user cancelled the login flow");
+  //     } else if (error.code === statusCodes.IN_PROGRESS) {
+  //       // operation (f.e. sign in) is in progress already
+  //       console.log("operation (f.e. sign in) is in progress already");
+  //     } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
+  //       // play services not available or outdated
+  //       console.log("play services not available or outdated");
+  //     } else {
+  //       // some other error happened
+  //       console.log("some other error happened");
+  //     }
+  //   }
+  // }
 
   _signIn = async () => {
     try {
@@ -79,6 +78,7 @@ export default class LoginController extends Component {
       this.setState({ userInfo: userInfo, loggedIn: true });
       console.log(userInfo);
     } catch (error) {
+      console.log(error);
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {
         // user cancelled the login flow
         console.log("user cancelled the login flow");
@@ -142,7 +142,7 @@ export default class LoginController extends Component {
                   style={{ width: 192, height: 48 }}
                   size={GoogleSigninButton.Size.Wide}
                   color={GoogleSigninButton.Color.Dark}
-                  onPress={this.firebaseGoogleLogin}
+                  onPress={this._signIn}
                   disabled={this.state.isSigninInProgress} />
               </View>
               <View style={styles.buttonContainer}>

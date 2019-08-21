@@ -188,10 +188,10 @@ android {
 }
 
 dependencies {
-    implementation project(':react-native-firebase')
     implementation project(':react-native-google-signin')
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "com.facebook.react:react-native:+"  // From node_modules
+    implementation "com.android.support:appcompat-v7:23.0.1"
 
     if (enableHermes) {
       def hermesPath = "../../node_modules/hermesvm/android/";
@@ -210,3 +210,4 @@ task copyDownloadableDepsToLibs(type: Copy) {
 }
 
 apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)
+apply plugin: 'com.google.gms.google-services'
