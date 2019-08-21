@@ -3,6 +3,8 @@ require_relative '../node_modules/@react-native-community/cli-platform-ios/nativ
 
 target 'RNGoogleLogin' do
   # Pods for RNGoogleLogin
+  pod 'Firebase/Core', '~> 6.3.0'
+  pod 'Firebase/Auth', '~> 6.3.0'
   pod 'GoogleSignIn', '~> 4.4.0'
   pod 'React', :path => '../node_modules/react-native/'
   pod 'React-Core', :path => '../node_modules/react-native/React'
@@ -29,6 +31,8 @@ target 'RNGoogleLogin' do
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
 
   pod 'RNGoogleSignin', :path => '../node_modules/react-native-google-signin'
+
+  pod 'RNFirebase', :path => '../node_modules/react-native-firebase'
 
   target 'RNGoogleLoginTests' do
     inherit! :search_paths
